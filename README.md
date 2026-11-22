@@ -43,7 +43,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1 -Editor all
 
 에디터 하나만 골라서 넣으려면 `-Editor codex`, `-Editor claude`처럼 주면 됩니다. bash 쪽은 `bash install.sh codex` 형태입니다.
 
-이미 설치돼 있는 스킬 디렉터리는 건드리기 전에 `.bak-<시간>`으로 백업한 뒤 새 걸 복사합니다. 옆에 있던 다른 스킬은 그대로 둡니다. 설치 뒤 에디터를 다시 시작하면 스킬이 등록됩니다.
+이미 설치돼 있는 스킬 디렉터리는 건드리기 전에 temp의 `opencode-skill-backups/`로 백업한 뒤 새 걸 복사합니다. 백업이 skills 폴더에 남아 중복 스킬로 잡히지 않게 한 것입니다. 옆에 있던 다른 스킬은 그대로 둡니다. 설치 뒤 에디터를 다시 시작하면 스킬이 등록됩니다.
 
 ### 에디터별 설치 경로
 
