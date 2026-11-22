@@ -13,6 +13,8 @@ EDITOR_TARGET="${1:-all}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$SCRIPT_DIR/skills"
 HOME_DIR="${HOME:-$USERPROFILE}"
+BACKUP_ROOT="${TMPDIR:-${TEMP:-/tmp}}/opencode-skill-backups"
+mkdir -p "$BACKUP_ROOT"
 
 case "$EDITOR_TARGET" in
   all)      TARGETS=(opencode codex claude) ;;
@@ -42,7 +44,7 @@ for target in "${TARGETS[@]}"; do
     fi
 
     if [ -e "$dst_dir" ]; then
-      backup="$dst_dir.bak-$(date +%Y%m%d-%H%M%S)"
+      backup="$BACKUP_ROOT/$skill-$target-$(date +%Y%m%d-%H%M%S)"
       mv "$dst_dir" "$backup"
       echo "  백업: $backup"
     fi

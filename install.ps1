@@ -14,6 +14,8 @@ $ErrorActionPreference = 'Stop'
 $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $src = Join-Path $repoRoot 'skills'
 $homeDir = $env:USERPROFILE
+$backupRoot = Join-Path $env:TEMP 'opencode-skill-backups'
+New-Item -ItemType Directory -Force -Path $backupRoot | Out-Null
 
 $paths = @{
     opencode = Join-Path $homeDir '.config\opencode\skills'
@@ -42,7 +44,7 @@ foreach ($target in $targets) {
 
         if (Test-Path $dstDir) {
             $stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
-            $backup = "$dstDir.bak-$stamp"
+            $backup = Join-Path $backupRoot "$skill-$target-$stamp"
             Move-Item -Path $dstDir -Destination $backup
             Write-Host "  백업: $backup"
         }
